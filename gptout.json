@@ -1,0 +1,76 @@
+{
+    "recipe_name": "Chocolate Crunch Bread",
+    "ingredients": [
+        "2 cups all-purpose flour",
+        "1/2 cup cocoa powder",
+        "1/2 cup granulated sugar",
+        "1/2 cup brown sugar",
+        "1 tsp baking powder",
+        "1/2 tsp baking soda",
+        "1/2 tsp salt",
+        "1/2 cup unsalted butter, melted",
+        "2 eggs",
+        "1 cup milk",
+        "1 cup chocolate chips",
+        "1 cup chopped walnuts"
+    ],
+    "safety_assurance": "This recipe has been tested and is safe for consumption. Please follow the instructions carefully to ensure the best results.",
+    "cooking_instructions": [
+        "Preheat the oven to 350°F.",
+        "In a large bowl, whisk together the flour, cocoa powder, granulated sugar, brown sugar, baking powder, baking soda, and salt.",
+        "In a separate bowl, whisk together the melted butter, eggs, and milk.",
+        "Pour the wet ingredients into the dry ingredients and stir until just combined.",
+        "Fold in the chocolate chips and chopped walnuts.",
+        "Pour the batter into a greased loaf pan and bake for 50-60 minutes, or until a toothpick inserted into the center comes out clean.",
+        "Let the bread cool in the pan for 10 minutes before removing it and slicing it."
+    ],
+    "origin": "Chocolate has been a staple ingredient in American cuisine for centuries, with the first chocolate factory opening in the United States in 1765. This recipe puts a modern twist on traditional chocolate bread by adding crunchy walnuts and rich chocolate chips. In Spanish, chocolate is called \"chocolatl,\" and it was originally used by the Aztecs as a bitter drink. Today, chocolate is enjoyed all over the world and is often associated with indulgence and luxury.",
+    "nutrition_comp": {
+        "Macronutrient": [
+            {
+                "Calories": "350"
+            },
+            {
+                "Fat": "18g"
+            },
+            {
+                "Carbohydrates": "44g"
+            },
+            {
+                "Protein": "6g"
+            }
+        ],
+        "Micronutrient": [
+            {
+                "Calcium": "80mg"
+            },
+            {
+                "Iron": "2mg"
+            },
+            {
+                "Potassium": "200mg"
+            },
+            {
+                "Vitamin A": "100IU"
+            },
+            {
+                "Vitamin C": "0mg"
+            }
+        ]
+    },
+    "n_values": "This recipe provides a good source of calcium, iron, and potassium, which are essential for maintaining healthy bones, blood, and muscles. Chocolate also contains antioxidants, which can help protect against heart disease and cancer. However, it is important to consume chocolate in moderation, as it is high in calories and fat.",
+    "user_com": [
+        {
+            "comment": "This bread is amazing! The chocolate and walnuts add the perfect amount of crunch and sweetness.",
+            "user": "Sarah"
+        },
+        {
+            "comment": "I was disappointed with this recipe. The bread was dry and lacked flavor.",
+            "user": "John"
+        },
+        {
+            "comment": "I loved the cultural significance of this recipe and the nutritional information was really helpful. The bread itself was delicious!",
+            "user": "Maria"
+        }
+    ]
+}
