@@ -1,6 +1,7 @@
 import openai
 import json
 import requests
+import re
 
 def get_completion(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
@@ -45,28 +46,77 @@ on the above recipe with positive, negative, and mixed sentiments
 
 """
 # get the response- recipe
-    response = get_completion(prompt_1)
+response = get_completion(prompt_1)
+text = response
 
-    print(response)
-# create a json file
-    prompt_3 = f"""
-        Output a text in json format containing the following keys: recipe_name, ingredients, \
-        safety_assurance, cooking_instructions, origin, nutrition_comp, n_values, user_com\
-        and Use the following instructions for creating json keys and values: \
-        recipe_name: <name of the recipe >\
-        ingredients: <ingredients of the recipe  >\
-        safety_assurance: < safety assurance of the recipe   > \
-        cooking_instructions: < cooking instructions of the recipe  > \
-        origin: < origin and cultural significance of the recipe  > \
-        nutrition_comp: < Nutritional Composition of the recipe   > \
-        n_values: < Nutritional Value and Medical Benefits of the recipe   > \
-        in {response}
-        and format them as list of items separated by commas \
-        Text: '''{response}'''\
-        """
-    response_3 = get_completion(prompt_3)
+ingredients_pattern = r"Ingredients:\s+([\s\S]*?)\n\n"
+Dish_Type_pattern = r"Dish Type:\s+(.*?)\n"
+Cuisine_Type_pattern = r"Cuisine Type:\s+(.*?)\n"
+Food_Restrictions_pattern = r"Food Restrictions:\s+(.*?)\n"
+Meal_Time_pattern = r"Meal Time:\s+(.*?)\n"
+Mood_pattern = r"Mood:\s+(.*?)\n"
+Texture__pattern = r"Texture of the Food:\s+(.*?)\n"
+Smell_pattern = r"Smell:\s+(.*?)\n"
+Color_pattern = r"Color:\s+(.*?)\n"
+Temperature_pattern = r"Temperature:\s+(.*?)\n"
+Heating_Method_pattern = r"Heating Method:\s+(.*?)\n"
+Calories_pattern = r"Calories:\s+(.*?)\n"
+recipe_pattern = r"Recipe:\s+([\s\S]*?)\n\n"
+Cooking_Instructions_pattern = r"Instructions:\s+([\s\S]*?)\n\n"
+Safety_pattern = r"Safety Assurance:\s+([\s\S]*?)\n\n"
+origin_pattern = r"Origin and Cultural Significance:\s+([\s\S]*?)\n\n"
+nutrition_composition_pattern = r"Nutritional Composition:\s+([\s\S]*?)\n\n"
+medical_pattern = r"Nutritional Value and Medical Benefits:\s+([\s\S]*?)\n\n"
+
+# Extract data using regular expressions
+
+Dish_Type = re.search(Dish_Type_pattern, text).group(1)
+Cuisine_Type = re.search(Cuisine_Type_pattern, text).group(1)
+Food_Restrictions = re.search(Food_Restrictions_pattern, text).group(1)
+Meal_Time = re.search(Meal_Time_pattern, text).group(1)
+Mood = re.search(Mood_pattern, text).group(1)
+Texture = re.search(Texture__pattern, text).group(1)
+Smell = re.search(Smell_pattern, text).group(1)
+Color = re.search(Color_pattern, text).group(1)
+Temperature = re.search(Temperature_pattern, text).group(1)
+Heating_Method = re.search(Heating_Method_pattern, text).group(1)
+Calories = re.search(Calories_pattern, text).group(1)
+ingredients = re.findall(ingredients_pattern, text)[0]
+recipe_name = re.findall(recipe_pattern, text)[0]
+Cooking_Instructions = re.findall(Cooking_Instructions_pattern, text)[0]
+Safety = re.findall(Safety_pattern, text)[0]
+origin = re.findall(origin_pattern, text)[0]
+nutrition_compositon = re.findall(nutrition_composition_pattern, text)[0]
+medical = re.findall(medical_pattern, text)[0]
+# Create a JSON object with extracted data
+data = {
+    "Recipe_name": recipe_name,
+    "Dish_Type": Dish_Type,
+    "Cuisine_Type": Cuisine_Type,
+    "Food_Restrictions": Food_Restrictions,
+    "Meal_Time": Meal_Time,
+    "Mood": Mood,
+    "Texture": Texture,
+    "Smell": Smell,
+    "Color":Color,
+    "Temperature": Temperature,
+    "Heating_Method":Heating_Method,
+    "Calories":Calories,
+    "Ingredients": ingredients,
+    "Cooking_Instructions": Cooking_Instructions,
+    "Safety": Safety,
+    "Origin": origin,
+    "Nutrition_compositon": nutrition_compositon,
+    "Medical": medical
+
+}
+
+# Convert the data to a JSON string and print it
+json_data = json.dumps(data)
+print(json_data)
+
     with open("gptout.json", "w") as f:
-        f.write(response_3) 
+        f.write(json_data) 
     file = open('gptout.json', 'r')
     data = file.read()
     cdata = json.loads(data)
