@@ -11,7 +11,7 @@ color=["#"+''.join([random.choice('0123456789ABCDEF') for i in range(6)])
 print(color)
 
 
-api_key = "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"
+api_key = "sk-"
 openai.api_key = api_key
 st.set_page_config(layout="wide")
 
