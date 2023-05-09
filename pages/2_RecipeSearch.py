@@ -3,10 +3,15 @@ import requests
 import openai
 import generate_recipe as gr
 import json
+import random
+
+no_of_colors=5
+color=["#"+''.join([random.choice('0123456789ABCDEF') for i in range(6)])
+       for j in range(no_of_colors)]
+print(color)
 
 
-
-api_key = "sk-"
+api_key = "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"
 openai.api_key = api_key
 st.set_page_config(layout="wide")
 
@@ -16,7 +21,8 @@ def display_recipe():
     cdata = json.loads(data)
     #st.image('./dalle_image.jpg')
     #st.write(cdata['recipe_name'])
-    st.header(cdata['recipe_name'])
+    name = cdata['recipe_name']
+    st.header(":blue["+name+"]")
     with st.container():
         c1,c2 = st.columns(2)
         with c1:
