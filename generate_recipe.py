@@ -44,11 +44,16 @@ provides by the research studies in the style of health information site like "H
 7 - at the end, add three comments from blog users with realistic names \
 on the above recipe with positive, negative, and mixed sentiments 
 
+8 - make sure to use  heading names exactly as listed: Recipe Name, Ingredients, Dish Type, Cuisine Type,
+Food Restrictions, Meal Type, Mood, Texture, Smell, Color, Temperature, Heating Method,
+Calories, Instructions, Safety Assurance, Origin and Cultural Significance, Nutrical Composition,
+Nutritional Value and Medical Benefits. 
+
 """
     # get the response- recipe
     response = get_completion(prompt_1)
     text = response
-    print(response)
+    
     ingredients_pattern = r"Ingredients:\s+([\s\S]*?)\n\n"
     Dish_Type_pattern = r"Dish Type:\s+(.*?)\n"
     Cuisine_Type_pattern = r"Cuisine Type:\s+(.*?)\n"
@@ -62,35 +67,87 @@ on the above recipe with positive, negative, and mixed sentiments
     Heating_Method_pattern = r"Heating Method:\s+(.*?)\n"
     Calories_pattern = r"Calories:\s+(.*?)\n"
     recipe_pattern = r"Recipe:\s+([\s\S]*?)\n\n"
+    recipe_pattern = r"Recipe Name:\s+([\s\S]*?)\n\n"
     Cooking_Instructions_pattern = r"Instructions:\s+([\s\S]*?)\n\n"
     Safety_pattern = r"Safety Assurance:\s+([\s\S]*?)\n\n"
     origin_pattern = r"Origin and Cultural Significance:\s+([\s\S]*?)\n\n"
     nutrition_composition_pattern = r"Nutritional Composition:\s+([\s\S]*?)\n\n"
     medical_pattern = r"Nutritional Value and Medical Benefits:\s+([\s\S]*?)\n\n"
 
-    print("ghhghhghh \n \n ",Dish_Type_pattern,ingredients_pattern)
     # Extract data using regular expressions
+    try:
+        Dish_Type = re.search(Dish_Type_pattern, text).group(1)
+    except: 
+        Dish_Type = None
+    try:
+        Cuisine_Type = re.search(Cuisine_Type_pattern, text).group(1)
+    except: 
+        Cuisine_Type = None
+    try:
+        Food_Restrictions = re.search(Food_Restrictions_pattern, text).group(1)
+    except: 
+        Food_Restrictions = None
+    try:
+        Meal_Type = re.search(Meal_Type_pattern, text).group(1)
+    except: 
+        Meal_Type = None
+    try:
+        Mood = re.search(Mood_pattern, text).group(1)
+    except: 
+        Mood = None 
+    try:
+        Texture = re.search(Texture__pattern, text).group(1)
+    except: 
+        Texture = None
+    try:
+        Smell = re.search(Smell_pattern, text).group(1)
+    except: 
+        Smell = None
+    try:
+        Color = re.search(Color_pattern, text).group(1)
+    except: 
+        Color = None
+    try:
+        Temperature = re.search(Temperature_pattern, text).group(1)
+    except:
+        Temperature = None
+    try:
+        Heating_Method = re.search(Heating_Method_pattern, text).group(1)
+    except:
+        Heating_Method = None
+    try:
+        Calories = re.search(Calories_pattern, text).group(1)
+    except:
+        Calories = None
+    try:
+        ingredients = re.findall(ingredients_pattern, text)[0]
+    except:
+        ingredients = None
+    try:
+        recipe_name = re.findall(recipe_pattern, text)[0]
+    except:
+        recipe_name = None
+    try:
+        Cooking_Instructions = re.findall(Cooking_Instructions_pattern, text)[0]
+    except: 
+        Cooking_Instructions = None 
+    try:
+        Safety = re.findall(Safety_pattern, text)[0]
+    except: 
+        Safety = None 
+    try:
+        origin = re.findall(origin_pattern, text)[0]
+    except:
+        origin = None 
+    try:
+        nutrition_composition = re.findall(nutrition_composition_pattern, text)[0]
+    except: 
+        nutrition_composition = None 
+    try:
+        medical = re.findall(medical_pattern, text)[0]
+    except: 
+        medical = None 
 
-    Dish_Type = re.search(Dish_Type_pattern, text).group(1)
-    Cuisine_Type = re.search(Cuisine_Type_pattern, text).group(1)
-    Food_Restrictions = re.search(Food_Restrictions_pattern, text).group(1)
-    Meal_Type = re.search(Meal_Type_pattern, text).group(1)
-    Mood = re.search(Mood_pattern, text).group(1)
-    Texture = re.search(Texture__pattern, text).group(1)
-    Smell = re.search(Smell_pattern, text).group(1)
-    Color = re.search(Color_pattern, text).group(1)
-    Temperature = re.search(Temperature_pattern, text).group(1)
-    Heating_Method = re.search(Heating_Method_pattern, text).group(1)
-    Calories = re.search(Calories_pattern, text).group(1)
-    ingredients = re.findall(ingredients_pattern, text)[0]
-    recipe_name = re.findall(recipe_pattern, text)[0]
-    Cooking_Instructions = re.findall(Cooking_Instructions_pattern, text)[0]
-    Safety = re.findall(Safety_pattern, text)[0]
-    origin = re.findall(origin_pattern, text)[0]
-    nutrition_composition = re.findall(nutrition_composition_pattern, text)[0]
-    medical = re.findall(medical_pattern, text)[0]
-
-    print(Dish_Type)
     # Create a JSON object with extracted data
     data = {
         "Recipe_name": recipe_name,
@@ -109,7 +166,7 @@ on the above recipe with positive, negative, and mixed sentiments
         "Cooking_Instructions": Cooking_Instructions,
         "Safety": Safety,
         "Origin": origin,
-        "Nutrition_compositon": nutrition_composition,
+        "Nutrition_composition": nutrition_composition,
         "Medical": medical
 
     }
