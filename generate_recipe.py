@@ -13,14 +13,14 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     return response.choices[0].message["content"]
 
 
-def search_recipes(query, cuisine, diet_label, dish_type, meal_time, food_restrictions, temperature, mood, texture, smell, calories, color, heating_method):
+def search_recipes(query, cuisine, dish_type, meal_time, food_restrictions, temperature, mood, texture, smell, calories, color, heating_method):
     prompt_1 = f"""
 
 Perform the following actions and output the result after all the actions are performed: 
 
 1 - Generate a recipe that incorporates the following factors: \
 ingredients - {query}, dish type - {dish_type}, cuisine type - {cuisine}, \
-food-restrictions - {food_restrictions}, meal-time - {meal_time}, mood - {mood}, \
+food-restrictions - {food_restrictions}, meal-type - {meal_time}, mood - {mood}, \
 texture of the food - {texture}, smell - {smell}, color - {color}, \
  temperature - {temperature},  \
 heating method - {heating_method}, and calories - {calories}. 
@@ -45,17 +45,17 @@ provides by the research studies in the style of health information site like "H
 on the above recipe with positive, negative, and mixed sentiments 
 
 """
-# get the response- recipe
+    # get the response- recipe
     response = get_completion(prompt_1)
     text = response
-
+    print(response)
     ingredients_pattern = r"Ingredients:\s+([\s\S]*?)\n\n"
     Dish_Type_pattern = r"Dish Type:\s+(.*?)\n"
     Cuisine_Type_pattern = r"Cuisine Type:\s+(.*?)\n"
     Food_Restrictions_pattern = r"Food Restrictions:\s+(.*?)\n"
-    Meal_Time_pattern = r"Meal Time:\s+(.*?)\n"
+    Meal_Type_pattern = r"Meal Type:\s+(.*?)\n"
     Mood_pattern = r"Mood:\s+(.*?)\n"
-    Texture__pattern = r"Texture of the Food:\s+(.*?)\n"
+    Texture__pattern = r"Texture\s+(.*?)\n"
     Smell_pattern = r"Smell:\s+(.*?)\n"
     Color_pattern = r"Color:\s+(.*?)\n"
     Temperature_pattern = r"Temperature:\s+(.*?)\n"
@@ -68,12 +68,13 @@ on the above recipe with positive, negative, and mixed sentiments
     nutrition_composition_pattern = r"Nutritional Composition:\s+([\s\S]*?)\n\n"
     medical_pattern = r"Nutritional Value and Medical Benefits:\s+([\s\S]*?)\n\n"
 
+    print("ghhghhghh \n \n ",Dish_Type_pattern,ingredients_pattern)
     # Extract data using regular expressions
 
     Dish_Type = re.search(Dish_Type_pattern, text).group(1)
     Cuisine_Type = re.search(Cuisine_Type_pattern, text).group(1)
     Food_Restrictions = re.search(Food_Restrictions_pattern, text).group(1)
-    Meal_Time = re.search(Meal_Time_pattern, text).group(1)
+    Meal_Type = re.search(Meal_Type_pattern, text).group(1)
     Mood = re.search(Mood_pattern, text).group(1)
     Texture = re.search(Texture__pattern, text).group(1)
     Smell = re.search(Smell_pattern, text).group(1)
@@ -86,15 +87,17 @@ on the above recipe with positive, negative, and mixed sentiments
     Cooking_Instructions = re.findall(Cooking_Instructions_pattern, text)[0]
     Safety = re.findall(Safety_pattern, text)[0]
     origin = re.findall(origin_pattern, text)[0]
-    nutrition_compositon = re.findall(nutrition_composition_pattern, text)[0]
+    nutrition_composition = re.findall(nutrition_composition_pattern, text)[0]
     medical = re.findall(medical_pattern, text)[0]
+
+    print(Dish_Type)
     # Create a JSON object with extracted data
     data = {
         "Recipe_name": recipe_name,
         "Dish_Type": Dish_Type,
         "Cuisine_Type": Cuisine_Type,
         "Food_Restrictions": Food_Restrictions,
-        "Meal_Time": Meal_Time,
+        "Meal_Type": Meal_Type,
         "Mood": Mood,
         "Texture": Texture,
         "Smell": Smell,
@@ -106,7 +109,7 @@ on the above recipe with positive, negative, and mixed sentiments
         "Cooking_Instructions": Cooking_Instructions,
         "Safety": Safety,
         "Origin": origin,
-        "Nutrition_compositon": nutrition_compositon,
+        "Nutrition_compositon": nutrition_composition,
         "Medical": medical
 
     }
@@ -121,16 +124,16 @@ on the above recipe with positive, negative, and mixed sentiments
     data = file.read()
     cdata = json.loads(data)
     file.close()
-    idea = (cdata['recipe_name'])
-# get the image
+    idea = (cdata['Recipe_name'])
+    # get the image
 
-    
-    bsize = "256x256"
+        
+    bsize = "512x512"
 
     response2 = openai.Image.create(prompt=idea, n=1, size=bsize)
     image_url = response2['data'][0]['url']
 
-# save the image
+    # save the image
     image_name = "dalle_image.jpg"
     data = requests.get(image_url).content
     f = open(image_name, 'wb')
