@@ -2,8 +2,8 @@ import streamlit as st
 from PIL import Image
 import allrecipes as rec
 st.set_page_config(
-    page_title="The Flavor Files",
-    page_icon="🥘",
+    page_title="Neural Recipe Box",
+    page_icon="🤖",
     layout="wide"
 )
 
@@ -16,10 +16,16 @@ home_tab, about_tab, recipe_tab = st.tabs(["Home", "About","Our Recipes"])
 with about_tab:
     st.header("About Us")
     st.subheader("Founded in 2023")
-    st.write("Welcome to The Flavor Files, where we celebrate the joy of cooking and sharing meals with loved ones. We're a team of passionate home cooks who believe that food is not just about sustenance, but also about creating meaningful connections and memories.")        
-    st.write("Our website is a place where you can generate an array of delicious recipes made from the ingredients you have in your kitchen. From simple weeknight dinners to festive holiday feasts, we have something for every occasion and palate.")
-    st.write('We believe that cooking should be fun, creative, and accessible to everyone, regardless of their level of experience in the kitchen.\n')
-    st.write("That's why we strive to make our recipes easy to follow and adaptable to suit your preferences and dietary needs.\n")
+    st.write("Welcome to Neural Recipe Box, where we bring the power of artificial intelligence to your kitchen! Our mission is to revolutionize the way people cook by providing cutting-edge, AI-generated recipes that are easy to follow and always delicious.")
+
+    st.write("Gone are the days of searching through countless recipe books or websites, only to be disappointed by lackluster results. With Neural Recipe Box, you can access a vast library of recipes that have been created and tested by our advanced AI algorithms. Whether you're a seasoned home cook or a novice in the kitchen, our recipes are designed to be easy to follow and produce consistently great results.")
+
+    st.write("At Neural Recipe Box, we believe that everyone should have access to great food. That's why our recipes are free to access and use. We're also committed to making our platform inclusive and accessible to all, regardless of skill level or dietary needs.")
+
+    st.write("Our team is comprised of passionate foodies, tech enthusiasts, and AI experts who are dedicated to pushing the boundaries of what's possible in the world of cooking. We're always experimenting with new ingredients, techniques, and flavor combinations to bring you the most innovative and exciting recipes.")
+
+    st.write("Thank you for choosing Neural Recipe Box as your go-to source for delicious, AI-generated recipes. We can't wait to see what you'll create in your kitchen!")        
+    #write("That's why we strive to make our recipes easy to follow and adaptable to suit your preferences and dietary needs.\n")
 
 with recipe_tab:
     st.subheader("Hey there! Here are our most popular recipes!")
@@ -52,10 +58,16 @@ with home_tab:
         col1.image(image2, use_column_width=True, width="100%")
         col2.header("About Us")
         col2.subheader("Founded in 2023")
-        col2.write("Welcome to The Flavor Files, where we celebrate the joy of cooking and sharing meals with loved ones. We're a team of passionate home cooks who believe that food is not just about sustenance, but also about creating meaningful connections and memories.")
-        col2.write("Our website is a place where you can generate an array of delicious recipes made from the ingredients you have in your kitchen. From simple weeknight dinners to festive holiday feasts, we have something for every occasion and palate.")
-        col2.write('We believe that cooking should be fun, creative, and accessible to everyone, regardless of their level of experience in the kitchen.\n')
-        col2.write("That's why we strive to make our recipes easy to follow and adaptable to suit your preferences and dietary needs.\n")
+        with col2:
+            st.write("Welcome to Neural Recipe Box, where we bring the power of artificial intelligence to your kitchen! Our mission is to revolutionize the way people cook by providing cutting-edge, AI-generated recipes that are easy to follow and always delicious.")
+
+            st.write("Gone are the days of searching through countless recipe books or websites, only to be disappointed by lackluster results. With Neural Recipe Box, you can access a vast library of recipes that have been created and tested by our advanced AI algorithms. Whether you're a seasoned home cook or a novice in the kitchen, our recipes are designed to be easy to follow and produce consistently great results.")
+
+            st.write("At Neural Recipe Box, we believe that everyone should have access to great food. That's why our recipes are free to access and use. We're also committed to making our platform inclusive and accessible to all, regardless of skill level or dietary needs.")
+
+            st.write("Our team is comprised of passionate foodies, tech enthusiasts, and AI experts who are dedicated to pushing the boundaries of what's possible in the world of cooking. We're always experimenting with new ingredients, techniques, and flavor combinations to bring you the most innovative and exciting recipes.")
+
+            st.write("Thank you for choosing Neural Recipe Box as your go-to source for delicious, AI-generated recipes. We can't wait to see what you'll create in your kitchen!")        
 
     st.write('---\n')
     st.header("Our Recipes")
