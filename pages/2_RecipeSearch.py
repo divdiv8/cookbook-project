@@ -4,7 +4,7 @@ import openai
 import generate_recipe as gr
 import json
 
-api_key = "sk-"
+api_key = "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"
 openai.api_key = api_key
 st.set_page_config(layout="wide")
 
